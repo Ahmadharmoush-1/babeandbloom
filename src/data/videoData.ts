@@ -10,7 +10,7 @@ export const videoConfigs: Record<string, VideoData> = {
   default: {
     title: "Elevate Your Culinary Experience",
     description: "Watch our premium kitchen essentials transform ordinary cooking into extraordinary culinary adventures",
-    videoUrl: "https://cdn.pixabay.com/video/2023/04/18/158940-821331702_large.mp4",
+    videoUrl: "/videos/videoplayback.mp4",
     overlayTitle: "Premium Quality in Every Detail",
     overlayDescription: "From professional cookware to elegant dining essentials"
   },
