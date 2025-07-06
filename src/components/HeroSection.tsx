@@ -51,12 +51,12 @@ const HeroSection = () => {
          <div className="flex items-center space-x-4">
   <img src="\photos\babeandbloomlogo.png" alt="Logo" className="h-16 w-16 rounded-full object-cover" />
   <h1 className="font-serif text-5xl sm:text-6xl md:text-8xl font-bold mb-4 sm:mb-6 text-gradient leading-tight tracking-wide">
-    Elegance Crafted
+   BABE AND BLOOM 
   </h1>
 </div>
 
           <h2 className="font-serif text-3xl sm:text-4xl md:text-6xl font-bold mb-8 sm:mb-12 text-primary leading-tight">
-            for You
+             Elegent Cratfted for You
           </h2>
           
           <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-4 font-light">

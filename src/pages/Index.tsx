@@ -129,7 +129,7 @@ const Index = () => {
             <Search className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/babeandbloom.lb/"
             target="_blank"
             rel="noopener noreferrer"
             className="p-1 sm:p-2 rounded-lg hover:bg-secondary/50 transition-colors text-primary hover:text-primary/80"
@@ -189,8 +189,7 @@ const Index = () => {
             </div>
           )}
           
-          {/* About Section - Only show on home page */}
-          {showHero && <AboutSection />}
+         
           
           {/* Video Section - Show appropriate video based on category */}
           <VideoSection {...getVideoConfig()} />
@@ -199,6 +198,8 @@ const Index = () => {
           <div className="relative">
             <ProductGrid selectedCategory={selectedCategory} />
           </div>
+            {/* About Section - Only show on home page */}
+          {showHero && <AboutSection />}
         </main>
       </div>
       

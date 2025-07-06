@@ -6,6 +6,7 @@ const AboutSection = () => {
 
   useEffect(() => {
     setIsVisible(true);
+    
   }, []);
 
   return (
