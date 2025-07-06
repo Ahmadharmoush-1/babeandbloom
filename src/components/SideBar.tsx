@@ -19,8 +19,8 @@ const categories = [
 const Sidebar = ({ selectedCategory, onCategorySelect }: SidebarProps) => {
   return (
     <div className="w-full lg:w-80 bg-card border-r border-border lg:h-screen p-4 sm:p-6 overflow-y-auto gradient-black-gold">
-      {/* Logo only visible on desktop and when sidebar is open on mobile */}
-      <div className="mb-6 sm:mb-8 hidden lg:block">
+      {/* Logo only visible on mobile when sidebar is open and on desktop */}
+      <div className="mb-6 sm:mb-8 lg:block">
         <Logo />
       </div>
       
@@ -39,7 +39,7 @@ const Sidebar = ({ selectedCategory, onCategorySelect }: SidebarProps) => {
                     : 'text-foreground hover:bg-secondary/50 hover:text-primary'
                 }`}
               >
-                <Icon className="w-5 h-5" />
+                <Icon className="w-5 h-5 flex-shrink-0" />
                 <span className="font-medium">{category.name}</span>
               </button>
             );

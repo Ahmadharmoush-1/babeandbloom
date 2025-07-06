@@ -32,22 +32,24 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Enhanced Header Bar with scroll animation */}
-      <div className={`bg-card border-b border-border p-4 flex items-center justify-between relative z-50 transition-all duration-300 ${
+      {/* Enhanced Header Bar with better mobile responsiveness */}
+      <div className={`bg-card border-b border-border p-3 sm:p-4 flex items-center justify-between relative z-50 transition-all duration-300 ${
         isScrolled ? 'shadow-lg backdrop-blur-sm bg-card/95' : ''
       }`}>
         {/* Left - Menu and Logo */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="lg:hidden p-2 rounded-lg hover:bg-secondary/50 transition-colors"
+            className="lg:hidden p-2 rounded-lg hover:bg-secondary/50 transition-colors flex-shrink-0"
           >
-            {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {sidebarOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
           </button>
-          <Logo />
+          <div className="min-w-0 flex-1">
+            <Logo />
+          </div>
         </div>
 
-        {/* Center - Navigation (Desktop) */}
+        {/* Center - Navigation (Desktop only) */}
         <div className="hidden lg:flex items-center gap-8">
           <button
             onClick={() => handleCategorySelect(null)}
@@ -107,26 +109,26 @@ const Index = () => {
           </button>
         </div>
 
-        {/* Right - Search, Instagram and Cart */}
-        <div className="flex items-center gap-4">
+        {/* Right - Search, Instagram and Cart with better mobile spacing */}
+        <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
           <button className="p-2 rounded-lg hover:bg-secondary/50 transition-colors">
-            <Search className="w-5 h-5" />
+            <Search className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
           <a
-            href="https://www.instagram.com/babeandbloom.lb/"
+            href="https://instagram.com"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-lg hover:bg-secondary/50 transition-colors text-primary hover:text-primary/80"
           >
-            <Instagram className="w-5 h-5" />
+            <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
           </a>
           <button 
             onClick={() => setShowCart(true)}
             className="p-2 rounded-lg hover:bg-secondary/50 transition-colors relative"
           >
-            <ShoppingCart className="w-5 h-5" />
+            <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
             {getTotalItems() > 0 && (
-              <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
+              <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-4 w-4 sm:h-5 sm:w-5 flex items-center justify-center text-xs font-bold">
                 {getTotalItems()}
               </span>
             )}
