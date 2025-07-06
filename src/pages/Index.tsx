@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { Menu, X, Search, ShoppingCart, Instagram } from 'lucide-react';
-import Sidebar from '../components/SideBar';
+import Sidebar from '../components/Sidebar';
 import HeroSection from '../components/HeroSection';
 import ProductGrid from '../components/ProductGrid';
 import CartSummary from '../components/CartSummary';
 import FloatingCartButton from '../components/FloatingCartButton';
 import VideoSection from '../components/VideoSection';
+import AboutSection from '../components/AboutSection';
+import SearchDialog from '../components/SearchDialog';
 import Logo from '../components/Logo';
 import { useCartStore } from '../store/cartStore';
 import { videoConfigs } from '../data/videoData';
@@ -16,6 +18,7 @@ const Index = () => {
   const [showCart, setShowCart] = useState(false);
   const [showHero, setShowHero] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
   const getTotalItems = useCartStore(state => state.getTotalItems);
   const isScrolled = useScrollAnimation(50);
 
@@ -33,16 +36,16 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Enhanced Header Bar with better mobile responsiveness */}
-      <div className={`bg-card border-b border-border p-3 sm:p-4 flex items-center justify-between relative z-50 transition-all duration-300 ${
+      <div className={`bg-card border-b border-border p-2 sm:p-4 flex items-center justify-between relative z-50 transition-all duration-300 ${
         isScrolled ? 'shadow-lg backdrop-blur-sm bg-card/95' : ''
       }`}>
         {/* Left - Menu and Logo */}
-        <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
+        <div className="flex items-center gap-1 sm:gap-4 flex-1 min-w-0">
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="lg:hidden p-2 rounded-lg hover:bg-secondary/50 transition-colors flex-shrink-0"
+            className="lg:hidden p-1 sm:p-2 rounded-lg hover:bg-secondary/50 transition-colors flex-shrink-0"
           >
-            {sidebarOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
+            {sidebarOpen ? <X className="w-4 h-4 sm:w-6 sm:h-6" /> : <Menu className="w-4 h-4 sm:w-6 sm:h-6" />}
           </button>
           <div className="min-w-0 flex-1">
             <Logo />
@@ -118,25 +121,28 @@ const Index = () => {
         </div>
 
         {/* Right - Search, Instagram and Cart with better mobile spacing */}
-        <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
-          <button className="p-2 rounded-lg hover:bg-secondary/50 transition-colors">
+        <div className="flex items-center gap-1 sm:gap-3 flex-shrink-0">
+          <button 
+            onClick={() => setShowSearch(true)}
+            className="p-1 sm:p-2 rounded-lg hover:bg-secondary/50 transition-colors"
+          >
             <Search className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
           <a
             href="https://instagram.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2 rounded-lg hover:bg-secondary/50 transition-colors text-primary hover:text-primary/80"
+            className="p-1 sm:p-2 rounded-lg hover:bg-secondary/50 transition-colors text-primary hover:text-primary/80"
           >
             <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
           </a>
           <button 
             onClick={() => setShowCart(true)}
-            className="p-2 rounded-lg hover:bg-secondary/50 transition-colors relative"
+            className="p-1 sm:p-2 rounded-lg hover:bg-secondary/50 transition-colors relative"
           >
             <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
             {getTotalItems() > 0 && (
-              <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-4 w-4 sm:h-5 sm:w-5 flex items-center justify-center text-xs font-bold">
+              <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-4 w-4 sm:h-5 sm:w-5 flex items-center justify-center font-bold min-w-[16px] sm:min-w-[20px]">
                 {getTotalItems()}
               </span>
             )}
@@ -183,6 +189,9 @@ const Index = () => {
             </div>
           )}
           
+          {/* About Section - Only show on home page */}
+          {showHero && <AboutSection />}
+          
           {/* Video Section - Show appropriate video based on category */}
           <VideoSection {...getVideoConfig()} />
           
@@ -195,6 +204,7 @@ const Index = () => {
       
       <FloatingCartButton onClick={() => setShowCart(true)} />
       <CartSummary isOpen={showCart} onClose={() => setShowCart(false)} />
+      <SearchDialog isOpen={showSearch} onClose={() => setShowSearch(false)} />
     </div>
   );
 };
