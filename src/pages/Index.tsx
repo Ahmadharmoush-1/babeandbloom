@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Menu, X, Search, ShoppingCart, Instagram } from 'lucide-react';
-import Sidebar from '../components/SideBar';
+import Sidebar from '../components/Sidebar';
 import HeroSection from '../components/HeroSection';
 import ProductGrid from '../components/ProductGrid';
 import CartSummary from '../components/CartSummary';
@@ -106,6 +106,14 @@ const Index = () => {
             }`}
           >
             Kitchen Decor
+          </button>
+          <button
+            onClick={() => handleCategorySelect('baby-essentials')}
+            className={`text-sm font-medium transition-colors hover:text-primary ${
+              selectedCategory === 'baby-essentials' ? 'text-primary border-b-2 border-primary pb-1' : 'text-muted-foreground'
+            }`}
+          >
+            Baby Essentials
           </button>
         </div>
 

@@ -10,22 +10,42 @@ const ProductGrid = ({ selectedCategory }: ProductGridProps) => {
     ? products.filter(product => product.category === selectedCategory)
     : products;
 
+  const getCategoryDisplayName = () => {
+    if (!selectedCategory) return 'All Products';
+    
+    switch (selectedCategory) {
+      case 'baby-essentials':
+        return 'Baby Essentials';
+      case 'cookware':
+        return 'Cookware';
+      case 'bakeware':
+        return 'Bakeware';
+      case 'appliances':
+        return 'Appliances';
+      case 'storage':
+        return 'Storage';
+      case 'dining':
+        return 'Dining';
+      case 'decor':
+        return 'Kitchen Decor';
+      default:
+        return 'Products';
+    }
+  };
+
   return (
     <div className="p-6 lg:p-8">
       <div className="mb-8">
         <h2 className="text-3xl font-bold text-foreground mb-2">
-          {selectedCategory 
-            ? products.find(p => p.category === selectedCategory)?.category.charAt(0).toUpperCase() + 
-              products.find(p => p.category === selectedCategory)?.category.slice(1) || 'Products'
-            : 'All Products'
-          }
+          {getCategoryDisplayName()}
         </h2>
         <p className="text-muted-foreground">
           {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'} available
         </p>
       </div>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
+      {/* Updated grid to show 2 products per row on mobile */}
+      <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 sm:gap-6">
         {filteredProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

@@ -59,6 +59,64 @@ export const products: Product[] = [
     description: "Ridged grill pan for indoor grilling perfection"
   },
 
+  // Baby Essentials (7 products)
+  {
+    id: 43,
+    name: "Baby Food Maker",
+    price: 79.99,
+    image: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=500&h=500&fit=crop",
+    category: "baby-essentials",
+    description: "Steam, blend, and warm baby food all in one device"
+  },
+  {
+    id: 44,
+    name: "Silicone Baby Plates Set",
+    price: 29.99,
+    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=500&h=500&fit=crop",
+    category: "baby-essentials",
+    description: "Non-slip suction plates perfect for self-feeding"
+  },
+  {
+    id: 45,
+    name: "Baby Bottle Warmer",
+    price: 45.99,
+    image: "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=500&h=500&fit=crop",
+    category: "baby-essentials",
+    description: "Quick and even bottle warming for busy parents"
+  },
+  {
+    id: 46,
+    name: "High Chair Cushion",
+    price: 35.99,
+    image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=500&h=500&fit=crop",
+    category: "baby-essentials",
+    description: "Comfortable and washable high chair cushion"
+  },
+  {
+    id: 47,
+    name: "Baby Sippy Cups",
+    price: 24.99,
+    image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=500&h=500&fit=crop",
+    category: "baby-essentials",
+    description: "Spill-proof sippy cups for toddlers"
+  },
+  {
+    id: 48,
+    name: "Baby Feeding Bib Set",
+    price: 19.99,
+    image: "https://images.unsplash.com/photo-1515488764276-beab7607c1e6?w=500&h=500&fit=crop",
+    category: "baby-essentials",
+    description: "Waterproof silicone bibs with food catcher"
+  },
+  {
+    id: 49,
+    name: "Baby Food Storage",
+    price: 32.99,
+    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&h=500&fit=crop",
+    category: "baby-essentials",
+    description: "BPA-free containers for storing homemade baby food"
+  },
+
   // Bakeware (7 products)
   {
     id: 8,
@@ -356,5 +414,6 @@ export const categories = [
   { id: 'appliances', name: 'Appliances', icon: '⚡' },
   { id: 'storage', name: 'Storage', icon: '📦' },
   { id: 'dining', name: 'Dining', icon: '🍽️' },
-  { id: 'decor', name: 'Kitchen Decor', icon: '✨' }
+  { id: 'decor', name: 'Kitchen Decor', icon: '✨' },
+  { id: 'baby-essentials', name: 'Baby Essentials', icon: '👶' }
 ];

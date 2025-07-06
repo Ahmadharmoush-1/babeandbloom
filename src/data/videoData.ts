@@ -10,7 +10,7 @@ export const videoConfigs: Record<string, VideoData> = {
   default: {
     title: "Elevate Your Culinary Experience",
     description: "Watch our premium kitchen essentials transform ordinary cooking into extraordinary culinary adventures",
-    videoUrl: "/videos/videoplayback.mp4",
+    videoUrl: "https://cdn.pixabay.com/video/2023/04/18/158940-821331702_large.mp4",
     overlayTitle: "Premium Quality in Every Detail",
     overlayDescription: "From professional cookware to elegant dining essentials"
   },
@@ -55,5 +55,12 @@ export const videoConfigs: Record<string, VideoData> = {
     videoUrl: "https://cdn.pixabay.com/video/2023/05/12/162719-828346579_large.mp4",
     overlayTitle: "Kitchen Style & Decor",
     overlayDescription: "Transform your kitchen into a space that inspires creativity"
+  },
+  "baby-essentials": {
+    title: "Nurture with Love & Care",
+    description: "Safe, thoughtfully designed baby essentials that make feeding time a joy for both you and your little one",
+    videoUrl: "https://cdn.pixabay.com/video/2021/05/05/74583-547533610_large.mp4",
+    overlayTitle: "Baby's First Adventures",
+    overlayDescription: "Creating precious moments with every meal and playtime"
   }
 };

@@ -1,4 +1,4 @@
-import { ChefHat, Utensils, Coffee, Home, Package, UtensilsCrossed, Sparkles } from 'lucide-react';
+import { ChefHat, Utensils, Coffee, Home, Package, UtensilsCrossed, Sparkles, Baby } from 'lucide-react';
 import Logo from './Logo';
 
 interface SidebarProps {
@@ -14,6 +14,7 @@ const categories = [
   { id: 'storage', name: 'Storage', icon: Package },
   { id: 'dining', name: 'Dining', icon: Utensils },
   { id: 'decor', name: 'Kitchen Decor', icon: Sparkles },
+  { id: 'baby-essentials', name: 'Baby Essentials', icon: Baby },
 ];
 
 const Sidebar = ({ selectedCategory, onCategorySelect }: SidebarProps) => {
