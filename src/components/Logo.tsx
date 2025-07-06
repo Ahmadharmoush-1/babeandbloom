@@ -5,7 +5,7 @@ const Logo = () => {
  <div className="flex items-center space-x-3">
   <img
     src="\photos\babeandbloomlogo.png"
-    alt="KitchenPro Logo"
+    alt="BabeandBloom Logo"
     className="h-16 w-16 rounded-full object-cover"
   />
  {/* <div className="flex flex-col">
