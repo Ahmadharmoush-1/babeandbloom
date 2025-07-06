@@ -46,44 +46,49 @@ const HeroSection = () => {
       </div>
       
       <div className="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto">
-        <div className={`transition-all duration-1000 ${isVisible ? 'animate-fadeInUp' : 'opacity-0'}`}>
-          {/* Luxury Serif Gold Headline */}
-         <div className="flex items-center space-x-4">
-  <img src="\photos\babeandbloomlogo.png" alt="Logo" className="h-16 w-16 rounded-full object-cover" />
-  <h1 className="font-serif text-5xl sm:text-6xl md:text-8xl font-bold mb-4 sm:mb-6 text-gradient leading-tight tracking-wide">
-   BABE AND BLOOM 
-  </h1>
+      <div className={`transition-all duration-1000 ${isVisible ? 'animate-fadeInUp' : 'opacity-0'}`}>
+  {/* Logo + Headline */}
+  <div className="flex items-center justify-center gap-4 sm:gap-6 mb-6 sm:mb-10">
+    <img 
+      src="/photos/babeandbloomlogo.png" 
+      alt="Babe and Bloom Logo" 
+      className="h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20 rounded-full object-cover border-2 border-primary shadow-md" 
+    />
+    <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl font-bold text-gradient leading-tight tracking-wide">
+      BABE AND BLOOM
+    </h1>
+  </div>
+
+  {/* Tagline */}
+  <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-4 font-light text-center">
+    Discover our exquisite collection of premium kitchen essentials, 
+    where luxury meets functionality in perfect harmony.
+  </p>
+
+  {/* CTA Buttons */}
+  <div className={`transition-all duration-1000 delay-500 ${isVisible ? 'animate-fadeInUp' : 'opacity-0'}`}>
+    <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
+      
+      {/* Shop Now Button */}
+      <div className="group relative">
+        <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-full blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+        <button className="relative bg-background px-8 py-4 rounded-full text-primary font-semibold text-base sm:text-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300 transform hover:scale-105 border border-primary/30">
+          Shop Now
+        </button>
+      </div>
+
+      {/* Explore Collections Button */}
+      <div className="group relative">
+        <div className="absolute -inset-1 bg-gradient-to-r from-accent to-primary rounded-full blur opacity-0 group-hover:opacity-75 transition duration-300"></div>
+        <button className="relative border-2 border-primary px-8 py-4 rounded-full text-primary font-semibold text-base sm:text-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300 transform hover:scale-105">
+          Explore Collections
+        </button>
+      </div>
+
+    </div>
+  </div>
 </div>
 
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-6xl font-bold mb-8 sm:mb-12 text-primary leading-tight">
-             Elegent Cratfted for You
-          </h2>
-          
-          <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-4 font-light">
-            Discover our exquisite collection of premium kitchen essentials, 
-            where luxury meets functionality in perfect harmony.
-          </p>
-          
-          <div className={`transition-all duration-1000 delay-500 ${isVisible ? 'animate-fadeInUp' : 'opacity-0'}`}>
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
-              {/* Shop Now Button */}
-              <div className="group relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-full blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-                <button className="relative bg-background px-8 py-4 rounded-full text-primary font-semibold text-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300 transform hover:scale-105 border border-primary/30">
-                  Shop Now
-                </button>
-              </div>
-              
-              {/* Explore Collections Button */}
-              <div className="group relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-accent to-primary rounded-full blur opacity-0 group-hover:opacity-75 transition duration-300"></div>
-                <button className="relative border-2 border-primary px-8 py-4 rounded-full text-primary font-semibold text-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300 transform hover:scale-105">
-                  Explore Collections
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Liquid Gold Transition Element */}
