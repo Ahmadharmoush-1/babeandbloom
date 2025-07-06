@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Menu, X, Search, ShoppingCart, Instagram } from 'lucide-react';
-import Sidebar from '../components/Sidebar';
+import Sidebar from '../components/SideBar';
 import HeroSection from '../components/HeroSection';
 import ProductGrid from '../components/ProductGrid';
 import CartSummary from '../components/CartSummary';
