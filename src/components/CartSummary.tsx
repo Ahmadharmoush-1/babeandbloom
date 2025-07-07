@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useCartStore } from '../store/cartStore';
 import { X, Plus, Minus, ShoppingBag, MessageCircle, MapPin, Phone, User } from 'lucide-react';
+import USPHighlights from './USPHighlights';
+import TrustBadges from './TrustBadges';
 
 interface CartSummaryProps {
   isOpen: boolean;
@@ -12,7 +14,8 @@ const CartSummary = ({ isOpen, onClose }: CartSummaryProps) => {
   const [customerInfo, setCustomerInfo] = useState({
     name: '',
     phone: '',
-    address: ''
+    address: '',
+    paymentMethod: 'cash'
   });
   const [showCheckout, setShowCheckout] = useState(false);
 
@@ -30,12 +33,15 @@ const CartSummary = ({ isOpen, onClose }: CartSummaryProps) => {
       `${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}`
     ).join('\n');
 
-    const message = `🛒 *New Order - BabeandBloom*
+    const paymentMethodText = customerInfo.paymentMethod === 'wish' ? 'Wish Card' : 'Cash on Delivery';
+
+    const message = `🛒 *New Order from BabeandBloom*
 
 👤 *Customer Details:*
 📝 Name: ${customerInfo.name}
 📞 Phone: ${customerInfo.phone}
 📍 Address: ${customerInfo.address}
+💳 Payment Method: ${paymentMethodText}
 
 📋 *Order Details:*
 ${orderDetails}
@@ -45,13 +51,15 @@ ${orderDetails}
 • Delivery Fee: $${deliveryFee.toFixed(2)}
 • *Total: $${totalPrice.toFixed(2)}*
 
+🚚 *Expected Delivery:* Within 3–5 business days from the order date.
+
 ✨ Thank you for choosing BabeandBloom! We'll process your order shortly.`;
 
     const whatsappUrl = `https://wa.me/96178841832?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
     
     clearCart();
-    setCustomerInfo({ name: '', phone: '', address: '' });
+    setCustomerInfo({ name: '', phone: '', address: '', paymentMethod: 'cash' });
     setShowCheckout(false);
     onClose();
   };
@@ -84,12 +92,15 @@ ${orderDetails}
             </div>
           ) : (
             <div className="p-4 sm:p-6 space-y-4">
+              <USPHighlights />
+              
               {items.map((item) => (
                 <div key={item.id} className="flex items-center space-x-4 bg-secondary/30 p-4 rounded-lg border border-border/50">
                   <img
                     src={item.image}
                     alt={item.name}
                     className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded-lg"
+                    loading="lazy"
                   />
                   <div className="flex-1 min-w-0">
                     <h4 className="font-semibold text-foreground text-sm sm:text-base truncate">{item.name}</h4>
@@ -99,6 +110,7 @@ ${orderDetails}
                     <button
                       onClick={() => updateQuantity(item.id, item.quantity - 1)}
                       className="p-1 hover:bg-secondary rounded transition-colors duration-200"
+                      aria-label="Decrease quantity"
                     >
                       <Minus className="w-4 h-4 text-foreground" />
                     </button>
@@ -106,6 +118,7 @@ ${orderDetails}
                     <button
                       onClick={() => updateQuantity(item.id, item.quantity + 1)}
                       className="p-1 hover:bg-secondary rounded transition-colors duration-200"
+                      aria-label="Increase quantity"
                     >
                       <Plus className="w-4 h-4 text-foreground" />
                     </button>
@@ -130,21 +143,26 @@ ${orderDetails}
             {!showCheckout ? (
               <div>
                 <div className="space-y-2 mb-4">
-                  <div className="flex justify-between items-center">
-                    <span className="text-foreground">Subtotal:</span>
-                    <span className="font-semibold text-foreground">${subtotal.toFixed(2)}</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-foreground">Delivery Fee:</span>
-                    <span className="font-semibold text-foreground">${deliveryFee.toFixed(2)}</span>
-                  </div>
-                  <div className="border-t border-border pt-2 mt-2">
-                    <div className="flex justify-between items-center">
-                      <span className="text-lg sm:text-xl font-bold text-foreground">Total:</span>
-                      <span className="text-xl sm:text-2xl font-bold text-primary">${totalPrice.toFixed(2)}</span>
-                    </div>
-                  </div>
+  <div className="flex justify-between items-center">
+    <span className="text-foreground">Subtotal:</span>
+    <span className="font-semibold text-foreground">${subtotal.toFixed(2)}</span>
+  </div>
+  <div className="flex justify-between items-center">
+    <span className="text-foreground">Delivery Fee:</span>
+    <span className="font-semibold text-green-600">$3.00</span>
+  </div>
+  <div className="border-t border-border pt-2 mt-2">
+    <div className="flex justify-between items-center">
+      <span className="text-lg sm:text-xl font-bold text-foreground">Total:</span>
+      <span className="text-xl sm:text-2xl font-bold text-primary">${(subtotal + 3).toFixed(2)}</span>
+    </div>
+  </div>
+</div>
+                
+                <div className="mb-4">
+                  <TrustBadges />
                 </div>
+                
                 <button
                   onClick={() => setShowCheckout(true)}
                   className="w-full gradient-gold text-primary-foreground py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 transform hover:scale-105"
@@ -192,27 +210,58 @@ ${orderDetails}
                       className="w-full pl-10 pr-4 py-3 bg-input border border-border rounded-lg text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-primary focus:border-transparent resize-none text-sm sm:text-base"
                     />
                   </div>
-                </div>
-                
-                <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-3 sm:p-4 rounded-lg border border-primary/20">
-                  <h4 className="font-semibold text-foreground mb-2 text-sm sm:text-base">Order Summary</h4>
-                  <div className="space-y-1 text-xs sm:text-sm">
-                    <div className="flex justify-between">
-                      <span>Subtotal:</span>
-                      <span>${subtotal.toFixed(2)}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Delivery Fee:</span>
-                      <span>${deliveryFee.toFixed(2)}</span>
-                    </div>
-                    <div className="border-t border-primary/20 pt-1 mt-1">
-                      <div className="flex justify-between font-bold text-primary">
-                        <span>Total:</span>
-                        <span>${totalPrice.toFixed(2)}</span>
-                      </div>
+
+                  <div className="bg-secondary/30 p-4 rounded-lg border border-border/50">
+                    <h4 className="font-semibold text-foreground mb-3 text-sm sm:text-base">Payment Method</h4>
+                    <div className="space-y-2">
+                      <label className="flex items-center space-x-3 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="paymentMethod"
+                          value="cash"
+                          checked={customerInfo.paymentMethod === 'cash'}
+                          onChange={(e) => setCustomerInfo({...customerInfo, paymentMethod: e.target.value})}
+                          className="text-primary focus:ring-primary"
+                        />
+                        <span className="text-foreground text-sm">💵 Cash on Delivery</span>
+                      </label>
+                      <label className="flex items-center space-x-3 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="paymentMethod"
+                          value="wish"
+                          checked={customerInfo.paymentMethod === 'wish'}
+                          onChange={(e) => setCustomerInfo({...customerInfo, paymentMethod: e.target.value})}
+                          className="text-primary focus:ring-primary"
+                        />
+                        <span className="text-foreground text-sm">💳 Wish Card</span>
+                      </label>
                     </div>
                   </div>
                 </div>
+                
+              <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-3 sm:p-4 rounded-lg border border-primary/20">
+  <h4 className="font-semibold text-foreground mb-2 text-sm sm:text-base">Order Summary</h4>
+  <div className="space-y-1 text-xs sm:text-sm">
+    <div className="flex justify-between">
+      <span>Subtotal:</span>
+      <span>${subtotal.toFixed(2)}</span>
+    </div>
+    <div className="flex justify-between">
+      <span>Delivery Fee:</span>
+      <span className="font-semibold text-green-600">$3.00</span>
+    </div>
+    <div className="border-t border-primary/20 pt-1 mt-1">
+      <div className="flex justify-between font-bold text-primary">
+        <span>Total:</span>
+        <span>${(subtotal + 3).toFixed(2)}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+                
+                <TrustBadges />
                 
                 <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
                   <button

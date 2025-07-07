@@ -1,17 +1,20 @@
-import { useState } from 'react';
-import { Menu, X, Search, ShoppingCart, Instagram } from 'lucide-react';
+import { useState, lazy, Suspense } from 'react';
+import { Menu, X, Search, ShoppingCart, Instagram, MessageCircle } from 'lucide-react';
 import Sidebar from '../components/SideBar';
 import HeroSection from '../components/HeroSection';
 import ProductGrid from '../components/ProductGrid';
-import CartSummary from '../components/CartSummary';
 import FloatingCartButton from '../components/FloatingCartButton';
 import VideoSection from '../components/VideoSection';
 import AboutSection from '../components/AboutSection';
 import SearchDialog from '../components/SearchDialog';
 import Logo from '../components/Logo';
+import ProductBenefits from '../components/ProductBenefits';
 import { useCartStore } from '../store/cartStore';
 import { videoConfigs } from '../data/videoData';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+
+// Lazy load CartSummary for better performance
+const CartSummary = lazy(() => import('../components/CartSummary'));
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -44,6 +47,7 @@ const Index = () => {
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
             className="lg:hidden p-1 sm:p-2 rounded-lg hover:bg-secondary/50 transition-colors flex-shrink-0"
+            aria-label="Toggle menu"
           >
             {sidebarOpen ? <X className="w-4 h-4 sm:w-6 sm:h-6" /> : <Menu className="w-4 h-4 sm:w-6 sm:h-6" />}
           </button>
@@ -120,25 +124,37 @@ const Index = () => {
           </button>
         </div>
 
-        {/* Right - Search, Instagram and Cart with better mobile spacing */}
+        {/* Right - Search, WhatsApp, Instagram and Cart with better mobile spacing */}
         <div className="flex items-center gap-1 sm:gap-3 flex-shrink-0">
           <button 
             onClick={() => setShowSearch(true)}
             className="p-1 sm:p-2 rounded-lg hover:bg-secondary/50 transition-colors"
+            aria-label="Search products"
           >
             <Search className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
+          <a
+            href="https://wa.me/96178841832"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-1 sm:p-2 rounded-lg hover:bg-secondary/50 transition-colors text-green-500 hover:text-green-400"
+            aria-label="Contact us on WhatsApp"
+          >
+            <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
+          </a>
           <a
             href="https://www.instagram.com/babeandbloom.lb/"
             target="_blank"
             rel="noopener noreferrer"
             className="p-1 sm:p-2 rounded-lg hover:bg-secondary/50 transition-colors text-primary hover:text-primary/80"
+            aria-label="Follow us on Instagram"
           >
             <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
           </a>
           <button 
             onClick={() => setShowCart(true)}
             className="p-1 sm:p-2 rounded-lg hover:bg-secondary/50 transition-colors relative"
+            aria-label="View cart"
           >
             <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
             {getTotalItems() > 0 && (
@@ -189,7 +205,15 @@ const Index = () => {
             </div>
           )}
           
+          {/* About Section - Only show on home page */}
          
+          
+          {/* Product Benefits - Show on home page */}
+          {showHero && (
+            <div className="container mx-auto px-4 py-8">
+              <ProductBenefits />
+            </div>
+          )}
           
           {/* Video Section - Show appropriate video based on category */}
           <VideoSection {...getVideoConfig()} />
@@ -198,13 +222,16 @@ const Index = () => {
           <div className="relative">
             <ProductGrid selectedCategory={selectedCategory} />
           </div>
-            {/* About Section - Only show on home page */}
-          {showHero && <AboutSection />}
         </main>
       </div>
+       {showHero && <AboutSection />}
       
       <FloatingCartButton onClick={() => setShowCart(true)} />
-      <CartSummary isOpen={showCart} onClose={() => setShowCart(false)} />
+      
+      <Suspense fallback={<div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"><div className="text-white">Loading...</div></div>}>
+        <CartSummary isOpen={showCart} onClose={() => setShowCart(false)} />
+      </Suspense>
+      
       <SearchDialog isOpen={showSearch} onClose={() => setShowSearch(false)} />
     </div>
   );

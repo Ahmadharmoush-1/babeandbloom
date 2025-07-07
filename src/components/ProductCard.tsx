@@ -1,14 +1,14 @@
 import { Product } from '../store/cartStore';
 import { useCartStore } from '../store/cartStore';
 import { ShoppingCart } from 'lucide-react';
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { useIntersectionObserver } from '../hooks/useScrollAnimation';
 
 interface ProductCardProps {
   product: Product;
 }
 
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = memo(({ product }: ProductCardProps) => {
   const addItem = useCartStore(state => state.addItem);
   const [isAdding, setIsAdding] = useState(false);
   const { ref, isIntersecting } = useIntersectionObserver();
@@ -32,6 +32,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
           src={product.image}
           alt={product.name}
           className="w-full h-48 sm:h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+          loading="lazy"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
@@ -52,6 +54,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
               ? 'bg-green-500 text-white scale-105'
               : 'gradient-gold text-primary-foreground hover:shadow-lg hover:shadow-primary/30 transform hover:scale-105'
           }`}
+          aria-label={`Add ${product.name} to cart`}
         >
           {isAdding ? (
             <>
@@ -72,6 +75,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </div>
     </div>
   );
-};
+});
+
+ProductCard.displayName = 'ProductCard';
 
 export default ProductCard;
