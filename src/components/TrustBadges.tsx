@@ -15,7 +15,7 @@ const TrustBadges = () => {
         </div>
         <div className="flex items-center space-x-2 text-xs">
           <Banknote className="w-4 h-4 text-blue-500 flex-shrink-0" />
-          <span className="text-foreground">Cash on Delivery</span>
+          <span className="text-foreground">COD - WHISH CARD</span>
         </div>
         <div className="flex items-center space-x-2 text-xs">
           <Lock className="w-4 h-4 text-purple-500 flex-shrink-0" />
@@ -28,7 +28,7 @@ const TrustBadges = () => {
         <div className="flex items-center justify-center space-x-3">
           <div className="flex items-center space-x-1">
             <Banknote className="w-4 h-4 text-green-600" />
-            <span className="text-xs text-foreground">Cash</span>
+            <span className="text-xs text-foreground">Cash On Delivery </span>
           </div>
           <div className="flex items-center space-x-1">
             <CreditCard className="w-4 h-4 text-blue-600" />
