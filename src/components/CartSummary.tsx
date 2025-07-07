@@ -36,7 +36,7 @@ const CartSummary = ({ isOpen, onClose }: CartSummaryProps) => {
 
     const paymentMethodText = customerInfo.paymentMethod === 'wish' ? 'Wish Card' : 'Cash on Delivery';
 
-    const message = `🛒 *New Order from Cozy Home + Baby Essentials*
+    const message = `🛒 *New Order from BabeandBloom*
 
 👤 *Customer Details:*
 📝 Name: ${customerInfo.name}
@@ -52,7 +52,7 @@ ${orderDetails}
 • Delivery Fee: $${deliveryFee.toFixed(2)}
 • *Total: $${totalPrice.toFixed(2)}*
 
-✨ Thank you for choosing Cozy Home + Baby Essentials! We'll process your order shortly.`;
+✨ Thank you for choosing BabeandBloom! We'll process your order shortly.`;
 
     const whatsappUrl = `https://wa.me/96178841832?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
